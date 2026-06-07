@@ -1,0 +1,98 @@
+<div data-form="proposal">
+  <div data-success hidden class="border border-zinc-700 bg-zinc-900 p-12 text-center flex flex-col items-center gap-5" role="alert" aria-live="polite">
+    <div class="w-14 h-14 bg-red-600/10 border border-red-600/30 flex items-center justify-center">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="w-7 h-7 text-red-500" aria-hidden="true">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" />
+      </svg>
+    </div>
+    <h2 class="text-2xl font-extrabold tracking-tight text-zinc-50">Proposal Request Received</h2>
+    <p class="text-zinc-400 text-sm leading-relaxed max-w-sm">Thank you, <span data-first-name></span>. Our team will review your event details and reach out within one business day.</p>
+  </div>
+
+  <form aria-label="Proposal request form" novalidate>
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+
+      <div class="flex flex-col gap-2">
+        <label for="pf-name" class="text-sm font-medium text-zinc-300 tracking-wide">Full Name *</label>
+        <input id="pf-name" name="name" type="text" autocomplete="name" placeholder="Jane Smith"
+          data-required data-error-message="Full name is required."
+          class="w-full bg-zinc-800 border border-zinc-700 focus:border-red-600 text-zinc-50 placeholder-zinc-600 text-sm px-4 py-3 outline-none transition-colors duration-200"
+          aria-required="true" />
+        <p data-error="name" class="text-red-400 text-xs" role="alert" hidden></p>
+      </div>
+
+      <div class="flex flex-col gap-2">
+        <label for="pf-company" class="text-sm font-medium text-zinc-300 tracking-wide">Company Name *</label>
+        <input id="pf-company" name="company" type="text" autocomplete="organization" placeholder="Acme Corporation"
+          data-required data-error-message="Company name is required."
+          class="w-full bg-zinc-800 border border-zinc-700 focus:border-red-600 text-zinc-50 placeholder-zinc-600 text-sm px-4 py-3 outline-none transition-colors duration-200"
+          aria-required="true" />
+        <p data-error="company" class="text-red-400 text-xs" role="alert" hidden></p>
+      </div>
+
+      <div class="flex flex-col gap-2">
+        <label for="pf-email" class="text-sm font-medium text-zinc-300 tracking-wide">Work Email *</label>
+        <input id="pf-email" name="email" type="email" autocomplete="email" placeholder="jane@company.com"
+          data-required data-error-message="A valid work email is required."
+          class="w-full bg-zinc-800 border border-zinc-700 focus:border-red-600 text-zinc-50 placeholder-zinc-600 text-sm px-4 py-3 outline-none transition-colors duration-200"
+          aria-required="true" />
+        <p data-error="email" class="text-red-400 text-xs" role="alert" hidden></p>
+      </div>
+
+      <div class="flex flex-col gap-2">
+        <label for="pf-date" class="text-sm font-medium text-zinc-300 tracking-wide">Approximate Event Date *</label>
+        <input id="pf-date" name="eventDate" type="date"
+          data-required data-error-message="Approximate event date is required."
+          class="w-full bg-zinc-800 border border-zinc-700 focus:border-red-600 text-zinc-50 placeholder-zinc-600 text-sm px-4 py-3 outline-none transition-colors duration-200 [color-scheme:dark]"
+          aria-required="true" />
+        <p data-error="eventDate" class="text-red-400 text-xs" role="alert" hidden></p>
+      </div>
+
+      <div class="flex flex-col gap-2">
+        <label for="pf-type" class="text-sm font-medium text-zinc-300 tracking-wide">Event Type *</label>
+        <select id="pf-type" name="eventType"
+          data-required data-error-message="Please select an event type."
+          class="w-full bg-zinc-800 border border-zinc-700 focus:border-red-600 text-zinc-50 placeholder-zinc-600 text-sm px-4 py-3 outline-none transition-colors duration-200 cursor-pointer"
+          aria-required="true">
+          <option value="" disabled selected>Select event type</option>
+          <option value="Town Hall / All-Hands">Town Hall / All-Hands</option>
+          <option value="Annual Summit / Conference">Annual Summit / Conference</option>
+          <option value="Product Launch">Product Launch</option>
+          <option value="Investor / Board Meeting">Investor / Board Meeting</option>
+          <option value="Award Ceremony / Gala">Award Ceremony / Gala</option>
+          <option value="Trade Show / Expo">Trade Show / Expo</option>
+          <option value="Hybrid / Virtual Event">Hybrid / Virtual Event</option>
+          <option value="Other">Other</option>
+        </select>
+        <p data-error="eventType" class="text-red-400 text-xs" role="alert" hidden></p>
+      </div>
+
+      <div class="flex flex-col gap-2">
+        <label for="pf-budget" class="text-sm font-medium text-zinc-300 tracking-wide">Estimated Budget *</label>
+        <select id="pf-budget" name="budget"
+          data-required data-error-message="Please select an estimated budget."
+          class="w-full bg-zinc-800 border border-zinc-700 focus:border-red-600 text-zinc-50 placeholder-zinc-600 text-sm px-4 py-3 outline-none transition-colors duration-200 cursor-pointer"
+          aria-required="true">
+          <option value="" disabled selected>Select estimated budget</option>
+          <option value="5k-10k">$5k &ndash; $10k</option>
+          <option value="10k-25k">$10k &ndash; $25k</option>
+          <option value="25k+">$25k+</option>
+        </select>
+        <p data-error="budget" class="text-red-400 text-xs" role="alert" hidden></p>
+      </div>
+
+      <div class="sm:col-span-2 flex flex-col gap-2">
+        <label for="pf-message" class="text-sm font-medium text-zinc-300 tracking-wide">Additional Details</label>
+        <textarea id="pf-message" name="message" rows="5"
+          placeholder="Describe your event — expected attendance, venue, special requirements, or anything else that helps us plan."
+          class="w-full bg-zinc-800 border border-zinc-700 focus:border-red-600 text-zinc-50 placeholder-zinc-600 text-sm px-4 py-3 outline-none transition-colors duration-200 resize-none"></textarea>
+      </div>
+
+    </div>
+
+    <div class="mt-8">
+      <button type="submit" class="bg-red-600 hover:bg-red-700 text-zinc-50 text-sm font-semibold tracking-wide px-10 py-4 transition-colors duration-200 w-full sm:w-auto">Submit Proposal Request</button>
+      <p class="mt-4 text-zinc-600 text-xs">We typically respond within one business day. No spam &mdash; ever.</p>
+    </div>
+  </form>
+</div>

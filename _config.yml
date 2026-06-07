@@ -1,0 +1,13 @@
+title: Lafayette Sound
+description: State of the art live presentations, sound, cameras, and streaming for events of every scale — groups of 20 or 2000.
+url: https://lafayettesound.com
+baseurl: ""
+
+permalink: pretty
+
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - src
+  - dist
+  - node_modules

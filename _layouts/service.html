@@ -1,0 +1,47 @@
+---
+layout: default
+---
+<div class="bg-zinc-950 pt-16">
+
+  <section class="bg-zinc-900 py-20 lg:py-28 border-b border-zinc-800/60" aria-labelledby="service-page-heading">
+    <div class="max-w-7xl mx-auto px-6 lg:px-8">
+      <div class="grid grid-cols-1 {% if page.image %}lg:grid-cols-2{% endif %} gap-12 items-center">
+        <div>
+          <p class="text-red-500 text-xs font-semibold tracking-widest uppercase mb-5">{{ page.eyebrow }}</p>
+          <h1 id="service-page-heading" class="text-5xl sm:text-6xl font-extrabold tracking-tight text-zinc-50 max-w-3xl leading-tight">{{ page.heading }}</h1>
+          <p class="mt-5 text-zinc-400 text-lg max-w-xl leading-relaxed">{{ page.intro }}</p>
+        </div>
+        {% if page.image %}
+        <div class="relative aspect-video overflow-hidden">
+          <img src="{{ page.image }}" alt="{{ page.heading }}" class="w-full h-full object-cover" loading="eager" />
+          <div class="absolute inset-0 bg-zinc-950/50" aria-hidden="true"></div>
+        </div>
+        {% endif %}
+      </div>
+    </div>
+  </section>
+
+  <section class="py-24 lg:py-32" aria-label="Service details">
+    <div class="max-w-7xl mx-auto px-6 lg:px-8">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20">
+        <div>
+          <p class="text-zinc-400 leading-relaxed text-lg">{{ page.description }}</p>
+        </div>
+        <div class="bg-zinc-900 border border-zinc-800 p-8">
+          <h2 class="text-xs font-semibold tracking-widest uppercase text-zinc-500 mb-6">What's Included</h2>
+          <ul class="flex flex-col gap-3" aria-label="{{ page.page_title }} capabilities">
+            {% for item in page.capabilities %}
+            <li class="flex items-start gap-3 text-sm text-zinc-300">
+              <span class="mt-1.5 w-1.5 h-1.5 bg-red-600 shrink-0" aria-hidden="true"></span>
+              {{ item }}
+            </li>
+            {% endfor %}
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {% include contact-form.html title="Let's Plan Your Event" subtitle="Tell us what you need and we'll put together a custom plan for your next presentation." %}
+
+</div>

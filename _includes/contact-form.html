@@ -1,0 +1,68 @@
+<section class="bg-zinc-900 border-t border-zinc-800/60 py-24 lg:py-32" aria-labelledby="cf-heading">
+  <div class="max-w-7xl mx-auto px-6 lg:px-8">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24">
+
+      <div>
+        <p class="text-red-500 text-xs font-semibold tracking-widest uppercase mb-5">Get In Touch</p>
+        <h2 id="cf-heading" class="text-4xl sm:text-5xl font-extrabold tracking-tight text-zinc-50 leading-tight">{{ include.title | default: "Ready to Get Started?" }}</h2>
+        <p class="mt-5 text-zinc-400 text-lg leading-relaxed">{{ include.subtitle | default: "Tell us about your event and we'll be in touch within one business day." }}</p>
+        <div class="mt-10 flex flex-col gap-4">
+          <a href="tel:+17657426710" class="flex items-center gap-3 text-zinc-300 hover:text-zinc-50 transition-colors duration-200 text-sm font-medium">
+            <span class="text-red-500 font-bold">&mdash;</span>
+            765-742-6710
+          </a>
+          <a href="mailto:info@lafayettesound.com" class="flex items-center gap-3 text-zinc-300 hover:text-zinc-50 transition-colors duration-200 text-sm font-medium">
+            <span class="text-red-500 font-bold">&mdash;</span>
+            info@lafayettesound.com
+          </a>
+        </div>
+      </div>
+
+      <div data-form="contact">
+        <div data-success hidden class="border border-zinc-700 bg-zinc-950 p-12 text-center flex flex-col items-center gap-5" role="alert" aria-live="polite">
+          <div class="w-12 h-12 bg-red-600/10 border border-red-600/30 flex items-center justify-center">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="w-6 h-6 text-red-500" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" />
+            </svg>
+          </div>
+          <h3 class="text-xl font-extrabold tracking-tight text-zinc-50">Message Received</h3>
+          <p class="text-zinc-400 text-sm leading-relaxed max-w-xs">Thank you, <span data-first-name></span>. We'll be in touch within one business day.</p>
+        </div>
+
+        <form class="flex flex-col gap-5" aria-label="Contact form" novalidate>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+            <div class="flex flex-col gap-2">
+              <label for="cf-name" class="text-sm font-medium text-zinc-300 tracking-wide">Name *</label>
+              <input id="cf-name" name="name" type="text" autocomplete="name" placeholder="Jane Smith"
+                data-required data-error-message="Name is required."
+                class="w-full bg-zinc-800 border border-zinc-700 focus:border-red-600 text-zinc-50 placeholder-zinc-600 text-sm px-4 py-3 outline-none transition-colors duration-200"
+                aria-required="true" />
+              <p data-error="name" class="text-red-400 text-xs" role="alert" hidden></p>
+            </div>
+            <div class="flex flex-col gap-2">
+              <label for="cf-email" class="text-sm font-medium text-zinc-300 tracking-wide">Email *</label>
+              <input id="cf-email" name="email" type="email" autocomplete="email" placeholder="jane@company.com"
+                data-required data-error-message="Valid email is required."
+                class="w-full bg-zinc-800 border border-zinc-700 focus:border-red-600 text-zinc-50 placeholder-zinc-600 text-sm px-4 py-3 outline-none transition-colors duration-200"
+                aria-required="true" />
+              <p data-error="email" class="text-red-400 text-xs" role="alert" hidden></p>
+            </div>
+          </div>
+          <div class="flex flex-col gap-2">
+            <label for="cf-phone" class="text-sm font-medium text-zinc-300 tracking-wide">Phone</label>
+            <input id="cf-phone" name="phone" type="tel" autocomplete="tel" placeholder="(765) 000-0000"
+              class="w-full bg-zinc-800 border border-zinc-700 focus:border-red-600 text-zinc-50 placeholder-zinc-600 text-sm px-4 py-3 outline-none transition-colors duration-200" />
+          </div>
+          <div class="flex flex-col gap-2">
+            <label for="cf-message" class="text-sm font-medium text-zinc-300 tracking-wide">Tell Us About Your Event</label>
+            <textarea id="cf-message" name="message" rows="4" placeholder="Venue, date, expected attendance, services needed..."
+              class="w-full bg-zinc-800 border border-zinc-700 focus:border-red-600 text-zinc-50 placeholder-zinc-600 text-sm px-4 py-3 outline-none transition-colors duration-200 resize-none"></textarea>
+          </div>
+          <button type="submit" class="bg-red-600 hover:bg-red-700 text-zinc-50 text-sm font-semibold tracking-wide px-8 py-4 transition-colors duration-200 w-full sm:w-auto">Send Message</button>
+          <p class="text-zinc-600 text-xs">We typically respond within one business day.</p>
+        </form>
+      </div>
+
+    </div>
+  </div>
+</section>
