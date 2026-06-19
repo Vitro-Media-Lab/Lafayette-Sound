@@ -15,6 +15,12 @@
     }
   </script>
   <title>{{ page.title | default: site.title }}</title>
+  <link rel="canonical" href="{{ page.url | absolute_url }}" />
+  <meta property="og:title" content="{{ page.title | default: site.title }}" />
+  <meta property="og:description" content="{{ page.meta_description | default: site.description }}" />
+  <meta property="og:url" content="{{ page.url | absolute_url }}" />
+  <meta property="og:type" content="website" />
+  {% include schema.html %}
 </head>
 <body>
   <div class="flex flex-col min-h-screen bg-zinc-950">

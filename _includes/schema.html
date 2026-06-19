@@ -1,0 +1,48 @@
+{% if page.schema_type == "LocalBusiness" %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  "name": "Lafayette Sound",
+  "url": "{{ site.url }}",
+  "priceRange": "$$$$",
+  "description": "Enterprise-grade live production, A/V, and livestreaming services for high-stakes corporate events.",
+  "areaServed": [
+    "Greater Lafayette, IN",
+    "Monticello, IN",
+    "Rensselaer, IN",
+    "West Lafayette, IN",
+    "Frankfort, IN",
+    "Crawfordsville, IN"
+  ],
+  "contactPoint": {
+    "@type": "ContactPoint",
+    "telephone": "{{ site.phone | default: '+1-765-000-0000' }}",
+    "email": "{{ site.email | default: 'info@lafayettesound.com' }}",
+    "contactType": "customer service"
+  }
+}
+</script>
+{% elsif page.schema_type == "Service" %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "serviceType": "{{ page.title }}",
+  "description": "{{ page.description }}",
+  "provider": {
+    "@type": "LocalBusiness",
+    "name": "Lafayette Sound",
+    "url": "{{ site.url }}"
+  },
+  "areaServed": [
+    "Greater Lafayette, IN",
+    "Monticello, IN",
+    "Rensselaer, IN",
+    "West Lafayette, IN",
+    "Frankfort, IN",
+    "Crawfordsville, IN"
+  ]
+}
+</script>
+{% endif %}

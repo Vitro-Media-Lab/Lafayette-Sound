@@ -3,6 +3,9 @@ description: State of the art live presentations, sound, cameras, and streaming 
 url: https://lafayettesound.com
 baseurl: ""
 
+phone: "+1-765-000-0000"
+email: "info@lafayettesound.com"
+
 permalink: pretty
 
 exclude:
