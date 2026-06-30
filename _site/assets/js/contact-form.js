@@ -4,15 +4,15 @@
   // Replace each entry.XXXXXXXXXX with the real entry IDs from your Google Form.
   // To find entry IDs: open your Google Form, click "Get pre-filled link",
   // fill in dummy data, click "Get link", and read the entry.XXXXX params from the URL.
-  var GOOGLE_FORM_ACTION = 'https://docs.google.com/forms/d/e/YOUR_GOOGLE_FORM_ID/formResponse';
+  var GOOGLE_FORM_ACTION = 'https://docs.google.com/forms/d/e/1FAIpQLSde_x2BElOpcfrsmlOB3uaJAkMgPjZnkgGTB_2DvwfGmHDYwQ/formResponse';
   var FIELD_MAP = {
-    name:      'entry.000000000',
-    company:   'entry.000000001',
-    email:     'entry.000000002',
-    phone:     'entry.000000003',
-    eventDate: 'entry.000000004',
-    services:  'entry.000000005',
-    message:   'entry.000000006'
+    name:      'entry.1142471041',
+    company:   'entry.1629888694',
+    email:     'entry.847894780',
+    phone:     'entry.1821652938',
+    eventDate: 'entry.1948046954',
+    services:  'entry.996011761',
+    message:   'entry.156633420'
   };
 
   var iframe = document.createElement('iframe');
@@ -101,13 +101,13 @@
 
         if (localName === 'services') {
           var checks = srcForm.querySelectorAll('input[name="services"]:checked')
-          var vals = []
-          checks.forEach(function (cb) { vals.push(cb.value) })
-          var hidden = document.createElement('input')
-          hidden.type = 'hidden'
-          hidden.name = entryId
-          hidden.value = vals.join(', ')
-          gForm.appendChild(hidden)
+          checks.forEach(function (cb) {
+            var hidden = document.createElement('input')
+            hidden.type = 'hidden'
+            hidden.name = entryId
+            hidden.value = cb.value
+            gForm.appendChild(hidden)
+          })
           return
         }
 
@@ -129,8 +129,8 @@
     function showSuccess(firstName) {
       var nameEl = successEl.querySelector('[data-first-name]')
       if (nameEl) nameEl.textContent = firstName
-      formEl.setAttribute('hidden', '')
-      successEl.removeAttribute('hidden')
+      formEl.style.display = 'none'
+      successEl.style.display = ''
     }
   }
 

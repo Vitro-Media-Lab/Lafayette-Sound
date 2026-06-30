@@ -88,12 +88,6 @@
         </div>
       </div>
 
-      <a href="/installations/"
-        class="text-sm font-medium tracking-wide transition-colors duration-200 text-zinc-400 hover:text-zinc-50"
-        >
-        Installations
-      </a>
-
       <a href="/work/"
         class="text-sm font-medium tracking-wide transition-colors duration-200 text-zinc-400 hover:text-zinc-50"
         >
@@ -138,7 +132,6 @@
       </div>
     </div>
 
-    <a href="/installations/" class="text-sm font-medium tracking-wide transition-colors duration-200 text-zinc-400 hover:text-zinc-50">Installations</a>
     <a href="/work/" class="text-sm font-medium tracking-wide transition-colors duration-200 text-zinc-400 hover:text-zinc-50">Our Work</a>
 
     <div class="flex items-center gap-5 mt-4 pt-4 border-t border-zinc-800/60" aria-label="Social media">
@@ -359,11 +352,15 @@
             <span class="text-red-500 font-bold">&mdash;</span>
             info@lafayettesound.com
           </a>
+          <address class="flex items-start gap-3 text-zinc-300 text-sm font-medium not-italic">
+            <span class="text-red-500 font-bold">&mdash;</span>
+            102 N. 3rd Street<br />Lafayette, Indiana 47901
+          </address>
         </div>
       </div>
 
       <div data-form="contact">
-        <div data-success hidden class="border border-zinc-700 bg-zinc-950 p-12 text-center flex flex-col items-center gap-5" role="alert" aria-live="polite">
+        <div data-success style="display:none" class="border border-zinc-700 bg-zinc-950 p-12 text-center flex flex-col items-center gap-5" role="alert" aria-live="polite">
           <div class="w-12 h-12 bg-red-600/10 border border-red-600/30 flex items-center justify-center">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="w-6 h-6 text-red-500" aria-hidden="true">
               <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" />
@@ -425,6 +422,7 @@
         <div class="flex flex-col gap-2 mt-2">
           <a href="tel:+17657426710" class="text-zinc-400 hover:text-zinc-50 text-sm transition-colors duration-200">765-742-6710</a>
           <a href="mailto:info@lafayettesound.com" class="text-zinc-400 hover:text-zinc-50 text-sm transition-colors duration-200">info@lafayettesound.com</a>
+          <address class="text-zinc-400 text-sm not-italic leading-snug">102 N. 3rd Street<br />Lafayette, Indiana 47901</address>
         </div>
         <div class="flex items-center gap-4 mt-4" aria-label="Social media">
           <a href="https://www.facebook.com/LafayetteSound/" target="_blank" rel="noopener noreferrer" class="text-zinc-400 hover:text-white transition-colors duration-200" aria-label="Facebook">
@@ -442,25 +440,72 @@
       <nav aria-label="Footer navigation" class="md:col-span-1">
         <h3 class="text-xs font-semibold tracking-widest uppercase text-zinc-500 mb-5">Navigation</h3>
         <ul class="flex flex-col gap-3">
-          <li><a href="/" class="text-sm text-zinc-400 hover:text-zinc-50 transition-colors duration-200">Home</a></li>
-          <li><a href="/installations/" class="text-sm text-zinc-400 hover:text-zinc-50 transition-colors duration-200">Installations</a></li>
-          <li><a href="/work/" class="text-sm text-zinc-400 hover:text-zinc-50 transition-colors duration-200">Our Work</a></li>
-          <li><a href="/contact/" class="text-sm text-zinc-400 hover:text-zinc-50 transition-colors duration-200">Contact</a></li>
-          <li><a href="/epk/" class="text-sm text-zinc-400 hover:text-zinc-50 transition-colors duration-200">Media Kit</a></li>
+          <li>
+            <a href="/" class="text-sm transition-colors duration-200 text-zinc-50 font-semibold">
+              <span class="inline-block w-1 h-1 bg-red-500 mr-1.5 mb-0.5" aria-hidden="true"></span>Home
+            </a>
+          </li>
+          <li>
+            <a href="/work/" class="text-sm transition-colors duration-200 text-zinc-400 hover:text-zinc-50">
+              Our Work
+            </a>
+          </li>
+          <li>
+            <a href="/contact/" class="text-sm transition-colors duration-200 text-zinc-400 hover:text-zinc-50">
+              Contact
+            </a>
+          </li>
+          <li>
+            <a href="/epk/" class="text-sm transition-colors duration-200 text-zinc-400 hover:text-zinc-50">
+              Media Kit
+            </a>
+          </li>
         </ul>
       </nav>
 
       <nav aria-label="Services navigation" class="md:col-span-1">
         <h3 class="text-xs font-semibold tracking-widest uppercase text-zinc-500 mb-5">Services</h3>
         <ul class="flex flex-col gap-3">
-          <li><a href="/presentations/" class="text-sm text-zinc-400 hover:text-zinc-50 transition-colors duration-200">Presentations</a></li>
-          <li><a href="/sound/" class="text-sm text-zinc-400 hover:text-zinc-50 transition-colors duration-200">Sound</a></li>
-          <li><a href="/cameras/" class="text-sm text-zinc-400 hover:text-zinc-50 transition-colors duration-200">Cameras &amp; Video</a></li>
-          <li><a href="/streaming/" class="text-sm text-zinc-400 hover:text-zinc-50 transition-colors duration-200">Live Streaming</a></li>
-          <li><a href="/staging/" class="text-sm text-zinc-400 hover:text-zinc-50 transition-colors duration-200">Staging</a></li>
-          <li><a href="/lighting/" class="text-sm text-zinc-400 hover:text-zinc-50 transition-colors duration-200">Lighting</a></li>
-          <li><a href="/installations/" class="text-sm text-zinc-400 hover:text-zinc-50 transition-colors duration-200">Installations</a></li>
-          <li><a href="/hospitality/" class="text-sm text-zinc-400 hover:text-zinc-50 transition-colors duration-200">Beverage &amp; Hospitality</a></li>
+          <li>
+            <a href="/presentations/" class="text-sm transition-colors duration-200 text-zinc-400 hover:text-zinc-50">
+              Presentations
+            </a>
+          </li>
+          <li>
+            <a href="/sound/" class="text-sm transition-colors duration-200 text-zinc-400 hover:text-zinc-50">
+              Sound
+            </a>
+          </li>
+          <li>
+            <a href="/cameras/" class="text-sm transition-colors duration-200 text-zinc-400 hover:text-zinc-50">
+              Cameras &amp; Video
+            </a>
+          </li>
+          <li>
+            <a href="/streaming/" class="text-sm transition-colors duration-200 text-zinc-400 hover:text-zinc-50">
+              Live Streaming
+            </a>
+          </li>
+          <li>
+            <a href="/staging/" class="text-sm transition-colors duration-200 text-zinc-400 hover:text-zinc-50">
+              Staging
+            </a>
+          </li>
+          <li>
+            <a href="/lighting/" class="text-sm transition-colors duration-200 text-zinc-400 hover:text-zinc-50">
+              Lighting
+            </a>
+          </li>
+          <li>
+            <a href="/installations/" class="text-sm transition-colors duration-200 text-zinc-400 hover:text-zinc-50">
+              Installations
+            </a>
+          </li>
+          <li>
+            <a href="/hospitality/" class="text-sm transition-colors duration-200 text-zinc-400 hover:text-zinc-50">
+              Beverage &amp; Hospitality
+            </a>
+          </li>
         </ul>
       </nav>
 
