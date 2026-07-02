@@ -14,3 +14,4 @@ exclude:
   - src
   - dist
   - node_modules
+  - google-apps-script

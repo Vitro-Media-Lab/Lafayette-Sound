@@ -1,29 +1,13 @@
 (function () {
-  // ─── Google Forms Configuration ───
-  // Replace YOUR_GOOGLE_FORM_ID with your actual form ID (from the form URL).
-  // Replace each entry.XXXXXXXXXX with the real entry IDs from your Google Form.
-  // To find entry IDs: open your Google Form, click "Get pre-filled link",
-  // fill in dummy data, click "Get link", and read the entry.XXXXX params from the URL.
-  var GOOGLE_FORM_ACTION = 'https://docs.google.com/forms/d/e/1FAIpQLSde_x2BElOpcfrsmlOB3uaJAkMgPjZnkgGTB_2DvwfGmHDYwQ/formResponse';
-  var FIELD_MAP = {
-    name:      'entry.1142471041',
-    company:   'entry.1629888694',
-    email:     'entry.847894780',
-    phone:     'entry.1821652938',
-    eventDate: 'entry.1948046954',
-    services:  'entry.996011761',
-    message:   'entry.156633420'
-  };
-
-  var iframe = document.createElement('iframe');
-  iframe.name = 'google-form-target';
-  iframe.style.display = 'none';
-  document.body.appendChild(iframe);
+  // Deployed Google Apps Script Web App URL (see google-apps-script/Code.gs).
+  var APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbynqX29Jhv0mAeKANvbKFCqK-yhBIj8EfiBEaHhPxOzX0C4JE0CgDlHWTLbN2fkb0_qxg/exec';
+  var GENERIC_ERROR = 'Something went wrong sending your message. Please email us directly at info@lafayettesound.com or call 765-742-6710.';
 
   function initForm(wrapper) {
     if (!wrapper) return
     var formEl = wrapper.querySelector('form')
     var successEl = wrapper.querySelector('[data-success]')
+    var errorEl = wrapper.querySelector('[data-form-error]')
     if (!formEl || !successEl) return
 
     function getError(name) {
@@ -38,6 +22,16 @@
         el.removeAttribute('hidden')
       } else {
         el.setAttribute('hidden', '')
+      }
+    }
+
+    function setFormError(msg) {
+      if (!errorEl) return
+      if (msg) {
+        errorEl.textContent = msg
+        errorEl.removeAttribute('hidden')
+      } else {
+        errorEl.setAttribute('hidden', '')
       }
     }
 
@@ -85,45 +79,41 @@
       var nameField = formEl.querySelector('[name="name"]')
       var firstName = nameField ? nameField.value.trim().split(' ')[0] : ''
 
-      submitToGoogleForm(formEl)
-      showSuccess(firstName)
+      setFormError(null)
+      submitToAppsScript(formEl)
+        .then(function () { showSuccess(firstName) })
+        .catch(function () { setFormError(GENERIC_ERROR) })
     })
 
-    function submitToGoogleForm(srcForm) {
-      var gForm = document.createElement('form')
-      gForm.method = 'POST'
-      gForm.action = GOOGLE_FORM_ACTION
-      gForm.target = 'google-form-target'
-      gForm.style.display = 'none'
+    function buildPayload(srcForm) {
+      var payload = {}
 
-      Object.keys(FIELD_MAP).forEach(function (localName) {
-        var entryId = FIELD_MAP[localName]
-
-        if (localName === 'services') {
-          var checks = srcForm.querySelectorAll('input[name="services"]:checked')
-          checks.forEach(function (cb) {
-            var hidden = document.createElement('input')
-            hidden.type = 'hidden'
-            hidden.name = entryId
-            hidden.value = cb.value
-            gForm.appendChild(hidden)
-          })
-          return
-        }
-
-        var field = srcForm.querySelector('[name="' + localName + '"]')
-        if (field && field.value) {
-          var hidden = document.createElement('input')
-          hidden.type = 'hidden'
-          hidden.name = entryId
-          hidden.value = field.value
-          gForm.appendChild(hidden)
-        }
+      srcForm.querySelectorAll('input, textarea, select').forEach(function (field) {
+        if (!field.name || field.name === 'services') return
+        payload[field.name] = field.value
       })
 
-      document.body.appendChild(gForm)
-      gForm.submit()
-      gForm.remove()
+      var serviceChecks = srcForm.querySelectorAll('input[name="services"]:checked')
+      if (serviceChecks.length) {
+        var services = []
+        serviceChecks.forEach(function (cb) { services.push(cb.value) })
+        payload.services = services.join(', ')
+      }
+
+      return payload
+    }
+
+    function submitToAppsScript(srcForm) {
+      if (APPS_SCRIPT_URL.indexOf('PASTE_DEPLOYMENT_ID') !== -1) {
+        return Promise.reject(new Error('Apps Script URL is not configured.'))
+      }
+
+      return fetch(APPS_SCRIPT_URL, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+        body: JSON.stringify(buildPayload(srcForm))
+      })
     }
 
     function showSuccess(firstName) {
