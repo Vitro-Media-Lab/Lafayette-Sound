@@ -21,6 +21,15 @@
       print-color-adjust: exact !important;
       color-adjust: exact !important;
     }
+
+    /* The page is a fixed 11x17in canvas (1in = 96px CSS reference) and is
+       scaled down visually to fit the viewport — screen and print see the
+       exact same layout, never a reflowed/responsive one. */
+    #page {
+      width: 11in;
+      height: 17in;
+    }
+
     @media print {
       .no-print { display: none !important; }
       html, body { background: #09090b !important; }
@@ -32,6 +41,10 @@
       .text-zinc-400 { color: #a1a1aa !important; }
       .text-zinc-500 { color: #71717a !important; }
       .border-zinc-800, [class*="border-zinc-800"] { border-color: #27272a !important; }
+
+      #page-viewport { padding: 0 !important; background: transparent !important; display: block !important; }
+      #page-scale { width: auto !important; height: auto !important; }
+      #page { transform: none !important; border: none !important; box-shadow: none !important; }
     }
     @page {
       size: 11in 17in;
@@ -41,117 +54,187 @@
 </head>
 <body class="bg-zinc-950 font-sans text-zinc-50">
 
-  <!-- Flyer Container — constrained to 11x17 proportions -->
-  <div class="max-w-[816px] mx-auto px-10 py-16 print:px-[0.75in] print:py-[0.5in]">
+  <!-- Page viewport — holds the fixed-size 11x17 page and scales it to fit any screen -->
+  <div class="w-full flex justify-center bg-zinc-900 py-10" id="page-viewport">
+    <div id="page-scale">
+      <div id="page" class="bg-zinc-950 border border-zinc-800 shadow-2xl shadow-black/50">
 
-    <!-- Header / Logo -->
-    <div class="text-center mb-12 print:mb-8">
-      <img src="/assets/images/LafayetteSound_Logo.png" alt="Lafayette Sound" class="h-14 mx-auto mb-6 print:h-12" />
-      <p class="text-red-500 text-xs font-semibold tracking-widest uppercase mb-3">Corporate Media &amp; Capabilities Kit</p>
-      <h1 class="text-4xl font-extrabold tracking-tight text-zinc-50 leading-tight">
-        Zero-Fail Live Event <span class="text-red-500">Production</span>
-      </h1>
-      <p class="mt-4 text-zinc-400 text-base leading-relaxed max-w-lg mx-auto">
-        Full-service audio, video, lighting, staging, and live streaming for corporate events that demand perfection.
-      </p>
-    </div>
+        <!-- Hero -->
+        <div class="relative h-[2.15in] overflow-hidden break-inside-avoid-page">
+          <img src="/assets/images/staging5.jpg" alt="Branded event stage with podium, American flag, and floral arrangements" class="absolute inset-0 w-full h-full object-cover" fetchpriority="high" />
+          <div class="absolute inset-0 bg-zinc-950/55" aria-hidden="true"></div>
+          <div class="absolute inset-0 bg-gradient-to-t from-zinc-950 via-zinc-950/40 to-zinc-950/70" aria-hidden="true"></div>
+          <div class="relative z-10 h-full flex flex-col items-center justify-center text-center px-10">
+            <img src="/assets/images/LafayetteSound_Logo.png" alt="Lafayette Sound" class="h-7 mx-auto mb-2" />
+            <p class="text-red-500 text-[10px] font-semibold tracking-widest uppercase mb-1">Corporate Media &amp; Capabilities Kit</p>
+            <h1 class="text-2xl font-extrabold tracking-tight text-zinc-50 leading-tight">
+              Zero-Fail Live Event <span class="text-red-500">Production</span>
+            </h1>
+            <p class="mt-1 text-zinc-300 text-xs leading-snug max-w-md mx-auto">
+              Full-service audio, video, lighting, staging, and live streaming for corporate events that demand perfection.
+            </p>
+          </div>
+        </div>
 
-    <div class="w-full h-px bg-zinc-800 mb-12 print:mb-8"></div>
+        <div class="px-[0.65in] py-[0.45in]">
 
-    <!-- Company Overview -->
-    <div class="mb-12 print:mb-8">
-      <p class="text-red-500 text-xs font-semibold tracking-widest uppercase mb-3">About Us</p>
-      <h2 class="text-2xl font-extrabold tracking-tight text-zinc-50 mb-4">Trusted by Organizers Who Can't Afford a Bad Event</h2>
-      <p class="text-zinc-400 text-sm leading-relaxed">
-        Lafayette Sound is a full-service live event production company based in Lafayette, Indiana. With over 12 years of experience and more than 500 events delivered, we provide broadcast-quality audio, video, lighting, staging, and live streaming for corporate conferences, town halls, keynotes, and high-profile gatherings — for groups of 20 or 2,000.
-      </p>
-    </div>
+        <!-- Company Overview -->
+        <div class="grid grid-cols-2 gap-6 items-center mb-6 break-inside-avoid-page">
+          <div>
+            <p class="text-red-500 text-[10px] font-semibold tracking-widest uppercase mb-1">About Us</p>
+            <h2 class="text-lg font-extrabold tracking-tight text-zinc-50 mb-2">Trusted by Organizers Who Can't Afford a Bad Event</h2>
+            <p class="text-zinc-400 text-xs leading-snug">
+              Lafayette Sound is a full-service live event production company based in Lafayette, Indiana. With over 12 years of experience and 500+ events delivered, we provide broadcast-quality audio, video, lighting, staging, and live streaming — for groups of 20 or 2,000.
+            </p>
+          </div>
+          <div class="aspect-[4/3] overflow-hidden border border-zinc-800">
+            <img src="/assets/images/gear2.jpg" alt="Lafayette Sound engineer running a digital mixing console at a live event" class="w-full h-full object-cover" loading="lazy" />
+          </div>
+        </div>
 
-    <!-- Stats Bar -->
-    <div class="grid grid-cols-3 gap-px bg-zinc-800 mb-12 print:mb-8">
-      <div class="bg-zinc-900 py-6 text-center">
-        <span class="block text-3xl font-extrabold tracking-tight text-zinc-50">500+</span>
-        <span class="block text-xs text-zinc-500 mt-1">Events Delivered</span>
+        <!-- Stats Bar -->
+        <div class="grid grid-cols-3 gap-px bg-zinc-800 mb-6 break-inside-avoid-page">
+          <div class="bg-zinc-900 py-4 text-center">
+            <span class="block text-xl font-extrabold tracking-tight text-zinc-50">500+</span>
+            <span class="block text-[10px] text-zinc-500 mt-0.5">Events Delivered</span>
+          </div>
+          <div class="bg-zinc-900 py-4 text-center">
+            <span class="block text-xl font-extrabold tracking-tight text-zinc-50">12+</span>
+            <span class="block text-[10px] text-zinc-500 mt-0.5">Years Experience</span>
+          </div>
+          <div class="bg-zinc-900 py-4 text-center">
+            <span class="block text-xl font-extrabold tracking-tight text-zinc-50">100%</span>
+            <span class="block text-[10px] text-zinc-500 mt-0.5">Stream Uptime</span>
+          </div>
+        </div>
+
+        <!-- Services -->
+        <div class="mb-6">
+          <p class="text-red-500 text-[10px] font-semibold tracking-widest uppercase mb-1">Our Services</p>
+          <h2 class="text-lg font-extrabold tracking-tight text-zinc-50 mb-3">Everything Your Event Needs</h2>
+          <div class="grid grid-cols-4 gap-px bg-zinc-800">
+            <div class="bg-zinc-950 flex flex-col break-inside-avoid-page">
+              <div class="aspect-[4/3] overflow-hidden"><img src="/assets/images/projector.jpg" alt="Large projection screen and speaker setup installed in a venue" class="w-full h-full object-cover" loading="lazy" /></div>
+              <div class="p-3">
+                <h3 class="text-xs font-bold text-zinc-50 mb-0.5">Presentations</h3>
+                <p class="text-zinc-500 text-[10px] leading-snug">Projectors, displays &amp; run-of-show.</p>
+              </div>
+            </div>
+            <div class="bg-zinc-950 flex flex-col break-inside-avoid-page">
+              <div class="aspect-[4/3] overflow-hidden"><img src="/assets/images/speakers1.jpg" alt="Line-array PA speakers and subwoofers rigged on stage" class="w-full h-full object-cover" loading="lazy" /></div>
+              <div class="p-3">
+                <h3 class="text-xs font-bold text-zinc-50 mb-0.5">Sound</h3>
+                <p class="text-zinc-500 text-[10px] leading-snug">Concert-grade PA &amp; digital mixing.</p>
+              </div>
+            </div>
+            <div class="bg-zinc-950 flex flex-col break-inside-avoid-page">
+              <div class="aspect-[4/3] overflow-hidden"><img src="/assets/images/camera.jpg" alt="PTZ broadcast cameras and video switching gear" class="w-full h-full object-cover" loading="lazy" /></div>
+              <div class="p-3">
+                <h3 class="text-xs font-bold text-zinc-50 mb-0.5">Cameras &amp; Video</h3>
+                <p class="text-zinc-500 text-[10px] leading-snug">Multi-cam, LED walls &amp; IMAG.</p>
+              </div>
+            </div>
+            <div class="bg-zinc-950 flex flex-col break-inside-avoid-page">
+              <div class="aspect-[4/3] overflow-hidden"><img src="/assets/images/video2.jpg" alt="Multi-camera streaming control desk monitoring a live broadcast" class="w-full h-full object-cover" loading="lazy" /></div>
+              <div class="p-3">
+                <h3 class="text-xs font-bold text-zinc-50 mb-0.5">Live Streaming</h3>
+                <p class="text-zinc-500 text-[10px] leading-snug">Redundant encoders &amp; failover.</p>
+              </div>
+            </div>
+            <div class="bg-zinc-950 flex flex-col break-inside-avoid-page">
+              <div class="aspect-[4/3] overflow-hidden"><img src="/assets/images/staging4.jpg" alt="Full stage build with truss and flags in front of a packed audience" class="w-full h-full object-cover" loading="lazy" /></div>
+              <div class="p-3">
+                <h3 class="text-xs font-bold text-zinc-50 mb-0.5">Staging</h3>
+                <p class="text-zinc-500 text-[10px] leading-snug">Custom stages &amp; ADA ramps.</p>
+              </div>
+            </div>
+            <div class="bg-zinc-950 flex flex-col break-inside-avoid-page">
+              <div class="aspect-[4/3] overflow-hidden"><img src="/assets/images/lighting1.jpg" alt="Close-up of stage lighting fixtures glowing green" class="w-full h-full object-cover" loading="lazy" /></div>
+              <div class="p-3">
+                <h3 class="text-xs font-bold text-zinc-50 mb-0.5">Lighting</h3>
+                <p class="text-zinc-500 text-[10px] leading-snug">Movers, wash &amp; DMX control.</p>
+              </div>
+            </div>
+            <div class="bg-zinc-950 flex flex-col break-inside-avoid-page">
+              <div class="aspect-[4/3] overflow-hidden"><img src="/assets/images/worship.jpeg" alt="Permanent installed displays and speakers in a large venue" class="w-full h-full object-cover" loading="lazy" /></div>
+              <div class="p-3">
+                <h3 class="text-xs font-bold text-zinc-50 mb-0.5">Installations</h3>
+                <p class="text-zinc-500 text-[10px] leading-snug">Permanent A/V for any venue.</p>
+              </div>
+            </div>
+            <div class="bg-zinc-950 flex flex-col break-inside-avoid-page">
+              <div class="aspect-[4/3] overflow-hidden"><img src="/assets/images/conference2.jpg" alt="Banquet reception with round tables set for dinner and festive balloon decor" class="w-full h-full object-cover" loading="lazy" /></div>
+              <div class="p-3">
+                <h3 class="text-xs font-bold text-zinc-50 mb-0.5">Beverage &amp; Hospitality</h3>
+                <p class="text-zinc-500 text-[10px] leading-snug">Full bar &amp; hydration stations.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Zero-Fail Guarantee -->
+        <div class="relative overflow-hidden mb-6 break-inside-avoid-page">
+          <img src="/assets/images/staging.jpg" alt="Empty venue staged and ready with rows of seating facing the stage" class="absolute inset-0 w-full h-full object-cover" loading="lazy" />
+          <div class="absolute inset-0 bg-zinc-950/80" aria-hidden="true"></div>
+          <div class="relative z-10 border border-zinc-800 p-6 text-center">
+            <p class="text-red-500 text-[10px] font-semibold tracking-widest uppercase mb-1">Our Commitment</p>
+            <h2 class="text-lg font-extrabold tracking-tight text-zinc-50 mb-2">The "Zero-Fail" Guarantee</h2>
+            <p class="text-zinc-300 text-sm leading-snug max-w-xl mx-auto">
+              Redundancy at every layer — backup audio paths, failover encoders, duplicate wireless frequencies, and standby gear staged on-site. That's not luck — it's preparation.
+            </p>
+          </div>
+        </div>
+
+        <!-- Contact Footer -->
+        <div class="border-t border-zinc-800 pt-6">
+          <div class="flex flex-row items-center justify-between gap-6">
+            <div>
+              <p class="text-zinc-50 text-sm font-bold tracking-tight">Lafayette Sound</p>
+              <p class="text-zinc-500 text-xs mt-1">Lafayette, Indiana — Serving clients throughout Indiana and beyond</p>
+            </div>
+            <div class="flex flex-col items-end gap-1 text-right">
+              <p class="text-zinc-400 text-sm">765-742-6710</p>
+              <p class="text-zinc-400 text-sm">info@lafayettesound.com</p>
+              <p class="text-red-500 text-sm font-semibold">lafayettesound.com</p>
+            </div>
+          </div>
+        </div>
+
+        </div>
+
       </div>
-      <div class="bg-zinc-900 py-6 text-center">
-        <span class="block text-3xl font-extrabold tracking-tight text-zinc-50">12+</span>
-        <span class="block text-xs text-zinc-500 mt-1">Years Experience</span>
-      </div>
-      <div class="bg-zinc-900 py-6 text-center">
-        <span class="block text-3xl font-extrabold tracking-tight text-zinc-50">100%</span>
-        <span class="block text-xs text-zinc-500 mt-1">Stream Uptime</span>
-      </div>
     </div>
-
-    <!-- Services -->
-    <div class="mb-12 print:mb-8">
-      <p class="text-red-500 text-xs font-semibold tracking-widest uppercase mb-3">Our Services</p>
-      <h2 class="text-2xl font-extrabold tracking-tight text-zinc-50 mb-6">Everything Your Event Needs</h2>
-      <div class="grid grid-cols-2 gap-px bg-zinc-800">
-        <div class="bg-zinc-950 p-5">
-          <h3 class="text-sm font-bold text-zinc-50 mb-1">Presentations</h3>
-          <p class="text-zinc-500 text-xs leading-relaxed">Projectors, displays, slide management, and full run-of-show coordination.</p>
-        </div>
-        <div class="bg-zinc-950 p-5">
-          <h3 class="text-sm font-bold text-zinc-50 mb-1">Sound</h3>
-          <p class="text-zinc-500 text-xs leading-relaxed">Concert-grade PA, digital mixing, wireless mics — tuned for every room.</p>
-        </div>
-        <div class="bg-zinc-950 p-5">
-          <h3 class="text-sm font-bold text-zinc-50 mb-1">Cameras &amp; Video</h3>
-          <p class="text-zinc-500 text-xs leading-relaxed">Multi-camera coverage, LED walls, HD projection, and IMAG.</p>
-        </div>
-        <div class="bg-zinc-950 p-5">
-          <h3 class="text-sm font-bold text-zinc-50 mb-1">Live Streaming</h3>
-          <p class="text-zinc-500 text-xs leading-relaxed">Multi-platform streaming with redundant encoders and failover systems.</p>
-        </div>
-        <div class="bg-zinc-950 p-5">
-          <h3 class="text-sm font-bold text-zinc-50 mb-1">Staging</h3>
-          <p class="text-zinc-500 text-xs leading-relaxed">Custom stage design, modular platforms, and ADA-compliant ramps.</p>
-        </div>
-        <div class="bg-zinc-950 p-5">
-          <h3 class="text-sm font-bold text-zinc-50 mb-1">Lighting</h3>
-          <p class="text-zinc-500 text-xs leading-relaxed">Stage wash, intelligent movers, accent lighting, and DMX programming.</p>
-        </div>
-        <div class="bg-zinc-950 p-5">
-          <h3 class="text-sm font-bold text-zinc-50 mb-1">Installations</h3>
-          <p class="text-zinc-500 text-xs leading-relaxed">Permanent A/V systems for boardrooms, venues, nightclubs, and bars.</p>
-        </div>
-        <div class="bg-zinc-950 p-5">
-          <h3 class="text-sm font-bold text-zinc-50 mb-1">Beverage &amp; Hospitality</h3>
-          <p class="text-zinc-500 text-xs leading-relaxed">Full bar service, hydration stations — fully insured and certified in Indiana.</p>
-        </div>
-      </div>
-    </div>
-
-    <!-- Zero-Fail Guarantee -->
-    <div class="bg-zinc-900 border border-zinc-800 p-8 mb-12 print:mb-8 text-center">
-      <p class="text-red-500 text-xs font-semibold tracking-widest uppercase mb-3">Our Commitment</p>
-      <h2 class="text-xl font-extrabold tracking-tight text-zinc-50 mb-3">The "Zero-Fail" Guarantee</h2>
-      <p class="text-zinc-400 text-sm leading-relaxed max-w-xl mx-auto">
-        Every production is built with redundancy at every layer — backup audio paths, failover streaming encoders, duplicate wireless frequencies, and standby equipment staged on-site. Your audience never knows when something goes wrong behind the scenes. That's not luck — it's preparation.
-      </p>
-    </div>
-
-    <!-- Contact Footer -->
-    <div class="border-t border-zinc-800 pt-8">
-      <div class="flex flex-col sm:flex-row items-center justify-between gap-6">
-        <div>
-          <p class="text-zinc-50 text-sm font-bold tracking-tight">Lafayette Sound</p>
-          <p class="text-zinc-500 text-xs mt-1">Lafayette, Indiana — Serving clients throughout Indiana and beyond</p>
-        </div>
-        <div class="flex flex-col items-end gap-1 text-right">
-          <p class="text-zinc-400 text-sm">765-742-6710</p>
-          <p class="text-zinc-400 text-sm">info@lafayettesound.com</p>
-          <p class="text-red-500 text-sm font-semibold">lafayettesound.com</p>
-        </div>
-      </div>
-    </div>
-
   </div>
+
+  <script>
+    (function () {
+      var page = document.getElementById('page');
+      var scaleWrap = document.getElementById('page-scale');
+      var GUTTER = 32;
+
+      function fit() {
+        var naturalW = page.offsetWidth;
+        var naturalH = page.offsetHeight;
+        if (!naturalW || !naturalH) return;
+        var available = window.innerWidth - GUTTER;
+        var scale = Math.min(1, available / naturalW);
+        page.style.transform = 'scale(' + scale + ')';
+        page.style.transformOrigin = 'top left';
+        scaleWrap.style.width = Math.ceil(naturalW * scale) + 'px';
+        scaleWrap.style.height = Math.ceil(naturalH * scale) + 'px';
+      }
+
+      window.addEventListener('resize', fit);
+      window.addEventListener('orientationchange', fit);
+      window.addEventListener('load', fit);
+      document.addEventListener('DOMContentLoaded', fit);
+      fit();
+    })();
+  </script>
 
   <!-- Web-only CTA -->
   <div class="bg-zinc-900 py-16 no-print">
-    <div class="max-w-[816px] mx-auto px-10 text-center">
+    <div class="max-w-[11in] mx-auto px-[0.75in] text-center">
       <h2 class="text-2xl font-extrabold tracking-tight text-zinc-50">Ready to Talk?</h2>
       <p class="mt-4 text-zinc-400 text-base leading-relaxed">Send this page to your stakeholders, or get in touch about your event.</p>
       <div class="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
