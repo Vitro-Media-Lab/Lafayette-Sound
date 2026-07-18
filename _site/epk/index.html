@@ -127,6 +127,10 @@
         <div class="mb-2">
           <p class="text-red-500 text-[9px] font-semibold tracking-widest uppercase mb-0.5">Our Services</p>
           <h2 class="text-[15px] font-extrabold tracking-tight text-zinc-50 mb-1.5">Everything Your Event Needs</h2>
+          <!-- Two stacked 4-col grids instead of one 4x2 grid: the second row
+               swaps to 3 centered columns when the hospitality card is toggled
+               off. The border-t stands in for the row gap so the hairline
+               follows the row's width. -->
           <div class="grid grid-cols-4 gap-px bg-zinc-800">
             <div class="bg-zinc-950 flex flex-col">
               <div class="aspect-[16/9] overflow-hidden"><img src="/assets/images/staging7.jpg" alt="Large projection screen and speaker setup installed in a venue" class="w-full h-full object-cover" /></div>
@@ -152,6 +156,8 @@
                 <h3 class="text-[11px] font-bold text-zinc-50 leading-tight">Live Streaming</h3>
               </div>
             </div>
+          </div>
+          <div id="services-row-2" class="grid grid-cols-4 gap-px bg-zinc-800 border-t border-zinc-800">
             <div class="bg-zinc-950 flex flex-col">
               <div class="aspect-[16/9] overflow-hidden"><img src="/assets/images/event-misc-03.jpg" alt="Full stage build with truss and flags in front of a packed audience" class="w-full h-full object-cover" /></div>
               <div class="p-1.5">
@@ -170,7 +176,7 @@
                 <h3 class="text-[11px] font-bold text-zinc-50 leading-tight">Installations</h3>
               </div>
             </div>
-            <div class="bg-zinc-950 flex flex-col">
+            <div id="hospitality-card" class="bg-zinc-950 flex flex-col">
               <div class="aspect-[16/9] overflow-hidden"><img src="/assets/images/conference2.jpg" alt="Banquet reception with round tables set for dinner and festive balloon decor" class="w-full h-full object-cover" /></div>
               <div class="p-1.5">
                 <h3 class="text-[11px] font-bold text-zinc-50 leading-tight">Beverage &amp; Hospitality</h3>
@@ -262,8 +268,28 @@
           Print This Page
         </button>
       </div>
+      <label class="mt-6 inline-flex items-center gap-2 text-zinc-500 hover:text-zinc-400 text-xs cursor-pointer select-none transition-colors duration-200">
+        <input type="checkbox" id="hospitality-toggle" checked class="w-3.5 h-3.5 accent-red-600 cursor-pointer" />
+        Include Beverage &amp; Hospitality
+      </label>
     </div>
   </div>
+
+  <script>
+    (function () {
+      var toggle = document.getElementById('hospitality-toggle');
+      var card = document.getElementById('hospitality-card');
+      var row = document.getElementById('services-row-2');
+      toggle.addEventListener('change', function () {
+        var show = toggle.checked;
+        card.classList.toggle('hidden', !show);
+        row.classList.toggle('grid-cols-4', show);
+        row.classList.toggle('grid-cols-3', !show);
+        row.classList.toggle('w-3/4', !show);
+        row.classList.toggle('mx-auto', !show);
+      });
+    })();
+  </script>
 
 </body>
 </html>
