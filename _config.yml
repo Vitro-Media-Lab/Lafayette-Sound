@@ -3,8 +3,11 @@ description: State of the art live presentations, sound, cameras, and streaming 
 url: https://www.lafayettesound.com
 baseurl: ""
 
-phone: "+1-765-000-0000"
+phone: "765-742-6710"
 email: "info@lafayettesound.com"
+
+# Cloudflare Turnstile site key (public). Secret lives in Apps Script Script Properties.
+turnstile_site_key: "0x4AAAAAAFVGAwvvMfWfA73m"
 
 permalink: pretty
 

@@ -2,6 +2,7 @@
   // Deployed Google Apps Script Web App URL (see google-apps-script/Code.gs).
   var APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbynqX29Jhv0mAeKANvbKFCqK-yhBIj8EfiBEaHhPxOzX0C4JE0CgDlHWTLbN2fkb0_qxg/exec';
   var GENERIC_ERROR = 'Something went wrong sending your message. Please email us directly at info@lafayettesound.com or call 765-742-6710.';
+  var VERIFY_PENDING = 'Please wait a moment while we verify your submission, then try again.';
 
   function initForm(wrapper) {
     if (!wrapper) return
@@ -79,11 +80,26 @@
       var nameField = formEl.querySelector('[name="name"]')
       var firstName = nameField ? nameField.value.trim().split(' ')[0] : ''
 
+      var tokenField = formEl.querySelector('[name="cf-turnstile-response"]')
+      if (!tokenField || !tokenField.value) {
+        setFormError(VERIFY_PENDING)
+        return
+      }
+
       setFormError(null)
       submitToAppsScript(formEl)
         .then(function () { showSuccess(firstName) })
-        .catch(function () { setFormError(GENERIC_ERROR) })
+        .catch(function () {
+          setFormError(GENERIC_ERROR)
+          resetTurnstile()
+        })
     })
+
+    // Turnstile tokens are single-use, so get a fresh one after a failed submit.
+    function resetTurnstile() {
+      var widget = formEl.querySelector('.cf-turnstile')
+      if (widget && window.turnstile) window.turnstile.reset(widget)
+    }
 
     function buildPayload(srcForm) {
       var payload = {}
@@ -108,12 +124,19 @@
         return Promise.reject(new Error('Apps Script URL is not configured.'))
       }
 
+      // text/plain keeps this a CORS "simple request" (no preflight); Apps Script's
+      // redirected response allows any origin, so the JSON result is readable.
       return fetch(APPS_SCRIPT_URL, {
         method: 'POST',
-        mode: 'no-cors',
         headers: { 'Content-Type': 'text/plain;charset=utf-8' },
         body: JSON.stringify(buildPayload(srcForm))
       })
+        .then(function (res) { return res.json() })
+        .then(function (data) {
+          if (!data || data.result !== 'success') {
+            throw new Error((data && data.message) || 'Submission failed.')
+          }
+        })
     }
 
     function showSuccess(firstName) {
